@@ -1,6 +1,7 @@
 package com.example.moon7.server_get_exam;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,6 +71,7 @@ public class MainActivity extends Activity {
                     Log.d("d","있음");
                 }
                 personList.add(persons);
+                Log.d("d",""+personList);
             }
 
             ListAdapter adapter = new SimpleAdapter(
@@ -92,11 +94,14 @@ public class MainActivity extends Activity {
             case R.id.btn:
                 getData(site);
                 break;
-            /*case R.id.btn_up:
+            case R.id.btn_up:
                 Intent i=new Intent(MainActivity.this,UpLoad.class);
-
+                /*if(getData.getStatus() == AsyncTask.Status.RUNNING ) {
+                    // TODO 실행중인경우
+                }*/
+                Log.d("d","intent선언 문제 x");
                 startActivity(i);
-                break;*/
+                break;
         }
     }
 
@@ -132,6 +137,13 @@ public class MainActivity extends Activity {
                 }
             }
 //
+            @Override
+            protected void onCancelled() {
+                // TODO 작업이 취소된후에 호출된다.
+                super.onCancelled();
+        }
+
+
             @Override
             protected void onPostExecute(String result){
                 myJSON=result;
